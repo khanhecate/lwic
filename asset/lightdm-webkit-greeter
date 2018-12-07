@@ -1,0 +1,5 @@
+#!/bin/bash
+if (whiptail --title " [ lightdm-webkit-greeter ]" --yesno "wolud you install lightdm-webkit-greeter ? " 10 60);then
+	apt install lightdm-webkit-greeter
+else exit
+fi

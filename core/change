@@ -1,0 +1,31 @@
+#!/bin/bash
+ls /usr/share/lightdm-webkit/themes/ > /tmp/tlist
+tlist=`cat /tmp/tlist`
+while true
+do
+tname=$(whiptail --title "[ List of Your Theme ]" --backtitle "FB = facebok.com/kh4nf1" --inputbox "Input your theme name , and your list theme on below \nList your theme : \n$tlist " 20 60 3>&1 1>&2 2>&3)
+end=$?
+if [[ $end = 0 ]]; then
+	clear
+else exit
+fi
+font=$(whiptail --title " [ Font type ]" --backtitle "FB = facebok.com/kh4nf1" --inputbox "Input font type , enter for default" 10 60 Ubuntu 3>&1 1>&2 2>&3)
+endfont=$?
+if [[ $endfont = 0 ]]; then
+	clear
+else exit
+fi
+if (whiptail --title "[ Confirmation ]" --backtitle "FB = facebok.com/kh4nf1" --yesno "are you sure that is correct ? \nName = $tname \nFont type = $font" 10 60); then
+	break
+fi
+done
+echo "[greeter]
+background=/usr/share/backgrounds/warty-final-ubuntu.png
+theme-name=$tname
+webkit-theme=$tname
+font-name=$font
+xft-antialias=true
+xft-dpi=96
+xft-hintstyle=slight
+xft-rgba=rgb " > /etc/lightdm/lightdm-webkit-greeter.conf
+whiptail --title "[ Done ]" --backtitle "FB = facebok.com/kh4nf1" --msgbox "$tname already installed !" 10 60

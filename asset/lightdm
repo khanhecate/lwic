@@ -1,0 +1,5 @@
+#!/bin/bash
+if (whiptail --title " [ lightdm ]" --yesno "wolud you install lightdm ? " 10 60);then
+	apt install lightdm
+else exit
+fi

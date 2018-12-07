@@ -1,0 +1,42 @@
+#!/bin/bash
+while true
+do
+	tname=$(whiptail --title "[ Theme Name ]" --backtitle "FB = facebok.com/kh4nf1" --inputbox "What is your folder theme name ?" 10 60 3>&1 1>&2 2>&3)
+	exitstatus=$?
+	if [[ $exitstatus = 0 ]]; then
+	clear
+	else exit
+	fi
+	path=$(whiptail --title "[ Path to theme File ]" --backtitle "FB = facebok.com/kh4nf1" --inputbox "Path your theme file   \nexample : /home/khan/Download/example-theme" 10 60 3>&1 1>&2 2>&3)
+	exitstatus=$?
+	if [[ $exitstatus = 0 ]]; then
+	clear
+	else exit
+	fi
+	if (whiptail --title "[ Confirmation ]" --backtitle "FB = facebok.com/kh4nf1" --yesno "are you sure that is correct ? \nName = $tname \nPath = $path" 10 60); then
+		cp -r $path /usr/share/lightdm-webkit/themes/ 
+		break
+	fi
+done
+#backup default config
+cp /etc/lightdm/lightdm-webkit-greeter.conf /etc/lightdm/lightdm-webkit-greeter.conf.bak
+#end of backup
+while true
+do
+font=$(whiptail --title " [ Font type ]" --backtitle "FB = facebok.com/kh4nf1" --inputbox "Input font type , enter for default" 10 60 Ubuntu 3>&1 1>&2 2>&3)
+if (whiptail --title "[ Confirmation ]" --backtitle "FB = facebok.com/kh4nf1" --yesno "are you sure that is correct ? \nFont type = $font" 10 60); then
+	break
+fi
+done
+echo "[greeter]
+background=/usr/share/backgrounds/warty-final-ubuntu.png
+theme-name=$tname
+webkit-theme=$tname
+font-name=$font
+xft-antialias=true
+xft-dpi=96
+xft-hintstyle=slight
+xft-rgba=rgb " > /etc/lightdm/lightdm-webkit-greeter.conf
+echo "[Seat:*]
+greeter-session=lightdm-webkit-greeter" > /usr/share/lightdm/lightdm.conf.d/60-lightdm-gtk-greeter.conf
+whiptail --title "[ done ]" --backtitle "FB = facebok.com/kh4nf1" --msgbox "done! your theme already installed and used !" 10 60

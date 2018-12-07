@@ -1,0 +1,4 @@
+#!/bin/bash
+echo "[Seat:*]
+greeter-session=lightdm-webkit-greeter"  > /usr/share/lightdm/lightdm.conf.d/60-lightdm-gtk-greeter.conf
+whiptail --title "[ Done ]" --backtitle "FB = facebok.com/kh4nf1" --msgbox "done ! , theme already change to webkit" 10 60

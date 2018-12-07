@@ -1,0 +1,6 @@
+#!/bin/bash
+if (whiptail --title "[ reset ]" --yesno "are you sure to reset to default theme ? " 10 60 );then
+	echo "[Seat:*]
+greeter-session=lightdm-gtk-greeter" > /usr/share/lightdm/lightdm.conf.d/60-lightdm-gtk-greeter.conf
+fi
+whiptail --title "[ Done ]" --backtitle "FB = facebok.com/kh4nf1" --msgbox "done ! , theme already reset ! and now theme become gtk" 10 60
